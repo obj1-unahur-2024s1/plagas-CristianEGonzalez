@@ -1,0 +1,39 @@
+import elementos.*
+
+describe "elementos"{
+
+const perroSaludable = new Mascota(nivelDeSalud=300)
+const gatoEnfermo = new Mascota(nivelDeSalud=50)
+const casaLinda = new Hogar(confort=200,nivelDeMugre=80)
+const mansion = new Hogar(confort=500,nivelDeMugre=3)
+const casilla = new Hogar(confort=100,nivelDeMugre=120)
+const palermo = new Barrio(elementos=[perroSaludable,gatoEnfermo,casaLinda,mansion,casilla])
+const laBoca = new Barrio(elementos=[gatoEnfermo,casaLinda,casilla])
+const laGranjaDeZenon = new Huerta(produccion = 1000)	
+	
+	test "una mascota es buena"{
+		assert.that(perroSaludable.good())
+	}
+	test "un hogar es bueno"{
+		assert.that(mansion.good())
+	}
+	test "una huerta es buena"{
+		assert.that(laGranjaDeZenon.good())
+	}
+	
+	test "un barrio es copado"{
+		assert.that(palermo.esCopado())
+	}
+	
+	test "una mascota no es buena"{
+		assert.notThat(gatoEnfermo.good())
+	}
+	
+	test "un hogar no es bueno"{
+		assert.notThat(casilla.good())
+	}
+	
+	test "un barrio no es copado"{
+		assert.notThat(laBoca.esCopado())
+	}
+}

@@ -1,0 +1,55 @@
+import plagas.*
+import elementos.*
+
+
+describe "plagas"{
+
+const perroSaludable = new Mascota(nivelDeSalud=300)
+const gatoEnfermo = new Mascota(nivelDeSalud=50)
+const mansion = new Hogar(confort=500,nivelDeMugre=3)
+const casilla = new Hogar(confort=100,nivelDeMugre=120)
+const laGranjaDeZenon = new Huerta(produccion = 1000)		
+
+const dengue = new Mosquitos(poblacion=300)
+const pulgas = new Pulgas(poblacion=100)
+const garrapatas = new Garrapatas(poblacion=50)
+const cucas = new Cucarachas(poblacion=20,pesoPromedio=8)
+	
+	test "nivel de daño de dengue" {
+		assert.equals(300, dengue.nivelDeDanio())
+	}
+	
+	test "nivel de dano pulgas"{
+		assert.equals(200, pulgas.nivelDeDanio())
+	}
+	
+	test "dengue transmite enfermedades"{
+		assert.that(dengue.transmiteEnfermedades())
+	}
+	
+	test "mansion recibe plaga de dengue"{
+		mansion.ataqueDe(dengue)
+		assert.equals(303, mansion.nivelDeMugre())
+	}
+	
+	test "laGranjaDeZenon recibe ataque de pulgas"{
+		laGranjaDeZenon.ataqueDe(pulgas)
+		assert.equals(970, laGranjaDeZenon.produccion())
+	}
+	
+	test "los mosquitos aumentan su poblcacion en 10% luego de atacar"{
+		mansion.ataqueDe(dengue)
+		assert.equals(330, dengue.poblacion())
+	}
+	
+	test "las garrapatas aumentan 20% su poblacion despues de atacar"{
+		perroSaludable.ataqueDe(garrapatas)
+		assert.equals(60, garrapatas.poblacion())
+	}
+	
+	test "cucarachas aumentan su peso en 2 gramos luego de atacar"{
+		casilla.ataqueDe(cucas)
+		assert.equals(10, cucas.pesoPromedio())
+	}
+}
+
